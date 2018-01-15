@@ -9,7 +9,8 @@ grammar Drink;
 * entrada es drinkSentence. ‘a pint of beer’, por lo tanto todos los tokens
 * son matcheados en la regla de drinkSentence y antlr puede reconocerlos.
 */
-drinkSentence : ARTICLE? DRINKING_VESSEL OF drink;
+drinkSentence : ARTICLE? DRINKING_VESSEL OF drink ;
+
 drink : TEXT;
 
 /*
@@ -20,8 +21,13 @@ drink : TEXT;
 * ‘of’ a OF y finalmente ‘beer’ a un texto,
 * que puede tener cualquier letra en minúscula una o más veces.
 */
-ARTICLE : 'the' | 'an' | 'a';
-OF: 'of';
-DRINKING_VESSEL : 'cup' | 'pint' | 'shot' | 'mug' | 'glass';
-TEXT : ('a'..'z')+;
+
+ARTICLE : 'the' | 'an' | 'a' ;
+
+OF : 'of' ;
+
+DRINKING_VESSEL : 'cup' | 'pint' | 'shot' | 'mug' | 'glass' ;
+
+TEXT : ('a'..'z')+ ;
+
 WHITESPACE : ( '\t' | ' ' | '\r' | '\n'| '\u000C' )+ -> skip ;

@@ -28,7 +28,7 @@ public class DrinkBaseListener implements DrinkListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void enterDrink(DrinkParser.DrinkContext ctx) {
-		System.out.println( ctx.getText() );
+		System.out.println(ctx.getText());
 	}
 	/**
 	 * {@inheritDoc}
