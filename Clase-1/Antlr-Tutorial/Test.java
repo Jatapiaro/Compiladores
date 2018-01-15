@@ -9,9 +9,22 @@ public class Test {
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
+        StringBuilder sb = new StringBuilder();
 
-        String drinkSentence = sc.nextLine();
+        while( sc.hasNext() ) {
+            sb.append( sc.nextLine() + "--");
+        }
 
+        String input = sb.toString();
+        System.out.println(input);
+
+        String[] sentences = input.split("--");
+        for ( String s : sentences ) {
+            printDrink( s );
+        }
+    }
+
+    public static void printDrink(String drinkSentence) {
         // Get our lexer
         DrinkLexer lexer = new DrinkLexer(new ANTLRInputStream(drinkSentence));
 
