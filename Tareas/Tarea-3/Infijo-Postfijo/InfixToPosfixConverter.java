@@ -11,17 +11,15 @@ public class InfixToPosfixConverter {
 
     public void addToken( String token ) {
         sb.append(token);
+        if ( Character.isDigit(token.charAt(0)) ) {
+            list.add(token.charAt(0));
+        } else {
+            this.pushOperatorToStack(token.charAt(0));
+        }
     }
 
     public String[] makeConversion() {
-        char[] tokens = sb.toString().toCharArray();
-        for(char t : tokens) {
-            if ( Character.isDigit(t) ) {
-                list.add(t);
-            } else {
-                this.pushOperatorToStack(t);
-            }
-        }
+
         while ( !this.st.empty() ) {
             this.list.add(this.st.pop());
         }
