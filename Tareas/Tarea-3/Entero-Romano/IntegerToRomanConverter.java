@@ -67,7 +67,8 @@ public class IntegerToRomanConverter {
 
     public void addThousand( String thousand ) {
         int value = Integer.parseInt(thousand);
-        if ( value > 0) {
+        //If you find a number greather than 4 in the thousand ignore it
+        if ( value > 0 && value < 4) {
             for ( int i = 0; i < value; i++ ) {
                 this.thousand.append("M");
             }

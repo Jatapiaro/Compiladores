@@ -16,7 +16,7 @@ public class IntegerToRomanParser extends Parser {
 	protected static final PredictionContextCache _sharedContextCache =
 		new PredictionContextCache();
 	public static final int
-		NUMBER=1, THOUSAND=2;
+		NUMBER=1;
 	public static final int
 		RULE_roman = 0, RULE_thousand = 1, RULE_hundred = 2, RULE_ten = 3, RULE_unit = 4;
 	public static final String[] ruleNames = {
@@ -26,7 +26,7 @@ public class IntegerToRomanParser extends Parser {
 	private static final String[] _LITERAL_NAMES = {
 	};
 	private static final String[] _SYMBOLIC_NAMES = {
-		null, "NUMBER", "THOUSAND"
+		null, "NUMBER"
 	};
 	public static final Vocabulary VOCABULARY = new VocabularyImpl(_LITERAL_NAMES, _SYMBOLIC_NAMES);
 
@@ -165,7 +165,7 @@ public class IntegerToRomanParser extends Parser {
 	}
 
 	public static class ThousandContext extends ParserRuleContext {
-		public TerminalNode THOUSAND() { return getToken(IntegerToRomanParser.THOUSAND, 0); }
+		public TerminalNode NUMBER() { return getToken(IntegerToRomanParser.NUMBER, 0); }
 		public ThousandContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -187,7 +187,7 @@ public class IntegerToRomanParser extends Parser {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(25);
-			match(THOUSAND);
+			match(NUMBER);
 			}
 		}
 		catch (RecognitionException re) {
@@ -313,14 +313,14 @@ public class IntegerToRomanParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3\4$\4\2\t\2\4\3\t"+
+		"\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3\3$\4\2\t\2\4\3\t"+
 		"\3\4\4\t\4\4\5\t\5\4\6\t\6\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2"+
 		"\3\2\3\2\5\2\32\n\2\3\3\3\3\3\4\3\4\3\5\3\5\3\6\3\6\3\6\2\2\7\2\4\6\b"+
 		"\n\2\2!\2\31\3\2\2\2\4\33\3\2\2\2\6\35\3\2\2\2\b\37\3\2\2\2\n!\3\2\2\2"+
 		"\f\32\5\n\6\2\r\16\5\b\5\2\16\17\5\n\6\2\17\32\3\2\2\2\20\21\5\6\4\2\21"+
 		"\22\5\b\5\2\22\23\5\n\6\2\23\32\3\2\2\2\24\25\5\4\3\2\25\26\5\6\4\2\26"+
 		"\27\5\b\5\2\27\30\5\n\6\2\30\32\3\2\2\2\31\f\3\2\2\2\31\r\3\2\2\2\31\20"+
-		"\3\2\2\2\31\24\3\2\2\2\32\3\3\2\2\2\33\34\7\4\2\2\34\5\3\2\2\2\35\36\7"+
+		"\3\2\2\2\31\24\3\2\2\2\32\3\3\2\2\2\33\34\7\3\2\2\34\5\3\2\2\2\35\36\7"+
 		"\3\2\2\36\7\3\2\2\2\37 \7\3\2\2 \t\3\2\2\2!\"\7\3\2\2\"\13\3\2\2\2\3\31";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
