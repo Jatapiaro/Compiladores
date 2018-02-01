@@ -35,7 +35,7 @@ public class Lexer {
 			System.in.mark(2);
 			char peek2 = (char)System.in.read();
 			if ( peek2 == '*') {
-				peek = (char)System.in.read();
+				//peek = (char)System.in.read();
 				while ( true ) {
 					peek = (char)System.in.read();
 					if ( peek == '*' ) {
@@ -44,7 +44,7 @@ public class Lexer {
 						    System.out.println("Tu comment fue: "+mySb.toString());
 						    break;
 						} else {
-							mySb.append("*");
+							mySb.append(peek);
 						}
 					} else {
 						mySb.append(peek);
