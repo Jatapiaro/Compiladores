@@ -1,32 +1,32 @@
-import java.io.*; 
-import java.util.*; 
+import java.io.*;
+import java.util.*;
 
-public class Lexer { 
+public class Lexer {
 
-	public int line = 1; 
-	private char peek = ' '; 
+	public int line = 1;
+	private char peek = ' ';
 	private Hashtable words = new Hashtable();
-	private boolean waitinForCommentaryEnd = false; 
+	private boolean waitinForCommentaryEnd = false;
 
-	public Lexer() { 
-		reserve( new Word(Tag.TRUE, "true") ); 
-		reserve( new Word(Tag.FALSE, "false") ); 
-	} 
+	public Lexer() {
+		reserve( new Word(Tag.TRUE, "true") );
+		reserve( new Word(Tag.FALSE, "false") );
+	}
 
-	void reserve(Word t) { 
-		words.put(t.lexeme, t); 
-	} 
+	void reserve(Word t) {
+		words.put(t.lexeme, t);
+	}
 
-	public Token scan() throws IOException { 
+	public Token scan() throws IOException {
 		for( ; ; peek = (char)System.in.read() ) {
 			if ( peek == ' ' || peek == '\t' ) {
 				continue;
-			} 
+			}
 			else if ( peek == '\n' ) {
-				line = line + 1; 
+				line = line + 1;
 			} else {
 				break;
-			} 
+			}
 		}
 
 
@@ -48,47 +48,44 @@ public class Lexer {
 						}
 					} else {
 						mySb.append(peek);
-					} 
+					}
 				}
 			} else {
 				System.in.reset();
 				System.in.mark(2);
 			}
-		} 
+		}
 
-		if( Character.isDigit(peek) ) { 
-			int v = 0; 
-			do { 
-				v = 10*v + Character.digit(peek, 10); 
-				peek = (char)System.in.read(); 
-			} while( Character.isDigit(peek) ); 
+		if( Character.isDigit(peek) ) {
+			int v = 0;
+			do {
+				v = 10*v + Character.digit(peek, 10);
+				peek = (char)System.in.read();
+			} while( Character.isDigit(peek) );
 			return new Num(v);
-		} 
+		}
 
-		if( Character.isLetter(peek) ) { 
+		if( Character.isLetter(peek) ) {
 
-			StringBuffer b = new StringBuffer(); 
-			do { 
-				b.append(peek); 
-				peek = (char)System.in.read(); 
-			} while( Character.isLetterOrDigit(peek) ); 
+			StringBuffer b = new StringBuffer();
+			do {
+				b.append(peek);
+				peek = (char)System.in.read();
+			} while( Character.isLetterOrDigit(peek) );
 
-			String s = b.toString(); 
-			Word w = (Word)words.get(s); 
+			String s = b.toString();
+			Word w = (Word)words.get(s);
 
 			if( w != null ) {
-				return w; 
+				return w;
 			}
-			w = new Word(Tag.ID, s); 
-			words.put(s, w); 
-			return w; 
+			w = new Word(Tag.ID, s);
+			words.put(s, w);
+			return w;
 
-		} 
+		}
 		Token t = new Token(peek);
 		peek = ' ';
 		return t;
 	}
 }
-		
-
-		
