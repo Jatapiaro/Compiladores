@@ -42,6 +42,9 @@ public class Lexer {
 						peek = (char)System.in.read();
 						if ( peek == '/' ) {
 						    System.out.println("Tu comment fue: "+mySb.toString());
+								peek = (char)System.in.read();
+								peek = (char)System.in.read();
+								System.in.mark(2);
 						    break;
 						} else {
 							mySb.append(peek);
