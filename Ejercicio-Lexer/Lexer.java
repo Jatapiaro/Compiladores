@@ -51,6 +51,12 @@ public class Lexer {
 					}
 				}
 			} else if (peek2 == '/') {
+				/*
+				* Aquí se manejan los comentarios simples
+				* Simplemente si encontramos dos //
+				* Ignoramos todo lo que este en frente hasta que lleguemos a un
+				* \n o \t
+				*/
 				while ( true ) {
 					peek = (char)System.in.read();
 					if ( peek == '\n' || peek == '\t'  ) {
