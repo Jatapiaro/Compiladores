@@ -50,6 +50,17 @@ public class Lexer {
 						mySb.append(peek);
 					}
 				}
+			} else if (peek2 == '/') {
+				while ( true ) {
+					peek = (char)System.in.read();
+					if ( peek == '\n' || peek == '\t'  ) {
+						peek = (char)System.in.read();
+						break;
+					} else {
+						mySb.append(peek);
+					}
+				}
+				//System.out.println("Tu comment fue: "+mySb.toString());
 			} else {
 				System.in.reset();
 				System.in.mark(2);
