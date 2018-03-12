@@ -17,11 +17,11 @@
 2. input a set of regex associated to actions
 3. Output is a table-driven Scanner
 4. Lex input
-`
+```
 FIRST PART
 %% <= this indicate start
 patteern action
 ...
 %% <= this indicate end
 THIRD PART
-`
+```  
