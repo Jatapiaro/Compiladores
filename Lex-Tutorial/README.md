@@ -1,3 +1,9 @@
+# Using lex
+1. `lex file.l2`
+2. `cc lex.yy.c -ll`
+3. `./a.out`
+
+
 # Lenguage processing
 1. Scanner (lexical analysis) => Token Stream
 2. Parser (syntax analysis) => Parse tree
