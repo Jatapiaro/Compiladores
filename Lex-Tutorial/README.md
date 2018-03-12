@@ -3,6 +3,17 @@
 2. `cc lex.yy.c -ll`
 3. `./a.out`
 
+#If you are using an external C file
+1. Follow the steps above
+2. `gcc your_c_file.c lex.yy.c -o output`
+
+#Lex pattern examples
+1. abc
+2. [a-zA-Z]
+3. `dog.*cat`
+4. (ab)+
+5. [^a-z]+ => don't accept lower case a-z
+6. [+-]=[0-9]+ => One or more digits with optional prefix of + or -
 
 # Lenguage processing
 1. Scanner (lexical analysis) => Token Stream
