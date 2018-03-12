@@ -1,0 +1,4 @@
+%%
+"hello world"   printf("GOODBYE\n"); /* print goodbye each time found hello world */
+.   ; /* Ignore eveythin else */
+%%
