@@ -23,6 +23,8 @@ text {lowercase_letter}{uppercase_letter}
 {lowercase_letter}+[A-Za-z]* return PREDICATE_NAME;
 _?[a-zA-Z]+ return VARIABLE;
 
+[ \t\n] ;
+
 %%
 
 

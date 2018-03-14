@@ -1,1 +1,2 @@
 esteEsUnEjemplo(_Variable, someData, calca, XO).
+otroEjemplo(send).
