@@ -1,2 +1,4 @@
-esteEsUnEjemplo(_Variable, someData, calca, XO).
-otroEjemplo(send).
+esteEsUnEjemplo(_Variable, someData, calca, XO) :-
+    ejemploA(_Vaiable2), ejemploB(_Variable3, data, XX).
+
+ejemploXX(nuevo, ejemplo, de, lexer).

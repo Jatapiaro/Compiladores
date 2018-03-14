@@ -19,6 +19,7 @@ text {lowercase_letter}{uppercase_letter}
 "." return DOT;
 "(" return OPEN_PARENTHESIS;
 "_" return UNDERSCORE;
+":-" return RULE;
 
 {lowercase_letter}+[A-Za-z]* return PREDICATE_NAME;
 _?[a-zA-Z]+ return VARIABLE;

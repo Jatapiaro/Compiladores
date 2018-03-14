@@ -6,3 +6,4 @@
 #define PREDICATE_NAME 5
 #define UNDERSCORE 6
 #define VARIABLE 7
+#define RULE 8

@@ -18,7 +18,8 @@ char * names[] = {
     "Open parenthesis",
     "Predicate Name or Data",
     "Underscore",
-    "Variable"
+    "Variable",
+    "Rule"
 };
 
 void print_token_message( int type ) {
@@ -26,7 +27,7 @@ void print_token_message( int type ) {
 }
 
 void print_error_message( char * expected ) {
-    printf("Syntax error in line %d, expected a '%s' but found ' %s '\n", yylineno, expected, yytext);
+    printf("Syntax error in line %d, expected a '%s' but found '%s'\n", yylineno, expected, yytext);
 }
 
 int main(int argc, char const *argv[]) {
@@ -34,6 +35,7 @@ int main(int argc, char const *argv[]) {
     int number_token, open_parenthesis_token,
         data_token, close_parenthesis_token,
         coma_token, dot_token;
+    int on_rule_enter = 0;
     //Read scanner and return first valid token
     number_token = yylex();
 
@@ -78,9 +80,9 @@ int main(int argc, char const *argv[]) {
                     }
 
                     coma_token = yylex();
-                    print_token_message(coma_token);
 
                     if ( coma_token == COMA ) {
+                        print_token_message(coma_token);
                         data_token = yylex();
                     } else {
                         close_parenthesis_token = coma_token;
@@ -92,12 +94,29 @@ int main(int argc, char const *argv[]) {
                         break;
                     }
                 }
+
                 dot_token = yylex();
-                if( dot_token != DOT ) {
-                    print_error_message(".");
-                    exit(1);
+
+                if ( on_rule_enter == 0 ) {
+
+                    if( dot_token == DOT || dot_token == RULE ) {
+                        on_rule_enter = ( dot_token == RULE )? 1 : 0;
+                        print_token_message(dot_token);
+                    } else {
+                        print_error_message(". or :-");
+                        exit(1);
+                    }
+
+                } else {
+                    if ( dot_token == COMA || dot_token == DOT ) {
+                        on_rule_enter = ( dot_token == DOT )? 0 : 1;
+                        print_token_message(dot_token);
+                    } else {
+                        print_error_message(", or .");
+                        exit(1);
+                    }
                 }
-                print_token_message(dot_token);
+
                 break;
                 /*
                 -----------------------------
@@ -110,6 +129,11 @@ int main(int argc, char const *argv[]) {
 
         number_token = yylex();
 
+    }
+
+    if ( on_rule_enter ) {
+        print_error_message("a predicate");
+        exit(1);
     }
 
     return 0;
