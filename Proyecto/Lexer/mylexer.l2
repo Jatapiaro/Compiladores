@@ -1,0 +1,31 @@
+%{
+    #include "mytokens.h"
+%}
+
+/* Regular definitions */
+
+digit [0-9]
+lowercase_letter [a-z]
+uppercase_letter [A-Z]
+text {lowercase_letter}{uppercase_letter}
+
+
+/* Patterns and actions */
+%%
+
+
+")" return CLOSE_PARENTHESIS;
+"," return COMA;
+"." return DOT;
+"(" return OPEN_PARENTHESIS;
+"_" return UNDERSCORE;
+
+{lowercase_letter}+[A-Za-z]* return PREDICATE_NAME;
+_?[a-zA-Z]+ return VARIABLE;
+
+%%
+
+
+int yywrap(void) {
+    return 1;
+}
