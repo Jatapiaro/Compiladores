@@ -7,3 +7,8 @@
 #define UNDERSCORE 6
 #define VARIABLE 7
 #define RULE 8
+#define GREATER_THAN 9
+#define LESS_THAN 10
+#define EQUAL 11
+#define EQUAL_OR_GREATHER_THAN 12
+#define EQUAL_OR_LESS_THAN 13
