@@ -33,6 +33,8 @@ text {lowercase_letter}{uppercase_letter}
 ([A-Za-z]+[a-z]+(_?))+ return DATA;
 (_?[A-Z]+[0-9]*)+ return VARIABLE;
 
+"%"[^*\n]* return COMMENT;
+
 [ \t\n] ;
 
 %%

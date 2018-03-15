@@ -14,3 +14,5 @@ persona(Juanita, Perez, mujer == hombre, 11) :-
     persona(Catrina, _, _, EDAD <= 11).
 
 pruebaRap22ida_es4to_FUn2ciona5(test, _, C).
+
+% Esto es un comentario de prueba

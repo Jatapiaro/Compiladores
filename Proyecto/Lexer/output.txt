@@ -150,3 +150,4 @@
 [7, Variable] => C
 [0, Close parenthesis] => )
 [2, Dot] => .
+[15, Comment] => % Esto es un comentario de prueba

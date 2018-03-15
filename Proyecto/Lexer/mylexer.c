@@ -25,7 +25,8 @@ char * names[] = {
     "Equal",
     "Equal or greather than",
     "Equal or less than",
-    "Data"
+    "Data",
+    "Comment"
 };
 
 void print_token_message( int type ) {
@@ -231,6 +232,10 @@ int main(int argc, char const *argv[]) {
                     print_error_message(".");
                     exit(1);
                 }
+                break;
+
+            case COMMENT:
+                print_token_message(number_token);
                 break;
 
             case RULE:
