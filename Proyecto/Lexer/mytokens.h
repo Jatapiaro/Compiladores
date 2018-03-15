@@ -1,5 +1,5 @@
 #define CLOSE_PARENTHESIS 0
-#define DATA 1
+#define INTEGER 1
 #define DOT 2
 #define COMA 3
 #define OPEN_PARENTHESIS 4
@@ -12,3 +12,4 @@
 #define EQUAL 11
 #define EQUAL_OR_GREATHER_THAN 12
 #define EQUAL_OR_LESS_THAN 13
+#define DATA 14

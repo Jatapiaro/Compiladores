@@ -2,6 +2,7 @@
 1. `lex mylexer.l2`
 2. `gcc mylexer.c lex.yy.c -o mylexer`
 3. Para correr el programa `./mylexer < sample.txt`
+4. En caso de que quieras la salida en otro archivo `./mylexer < sample.txt > output.txt`
 
 # ¿Cómo funciona?
 1. En mytokens.h definimos todos los tokens que actualmente soportamos.

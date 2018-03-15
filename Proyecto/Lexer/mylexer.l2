@@ -28,8 +28,10 @@ text {lowercase_letter}{uppercase_letter}
 "<" return LESS_THAN;
 ">" return GREATER_THAN;
 
-{lowercase_letter}+[A-Za-z]* return PREDICATE_NAME;
-_?[A-Z]+ return VARIABLE;
+{lowercase_letter}+[A-Za-z]*[0-9]* return PREDICATE_NAME;
+[0-9]+ return INTEGER;
+[A-Za-z]+[a-z]+ return DATA;
+(_?[A-Z]+[0-9]*)+ return VARIABLE;
 
 [ \t\n] ;
 
