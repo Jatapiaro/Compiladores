@@ -22,7 +22,7 @@ text {lowercase_letter}{uppercase_letter}
 ":-" return RULE;
 
 {lowercase_letter}+[A-Za-z]* return PREDICATE_NAME;
-_?[a-zA-Z]+ return VARIABLE;
+_?[A-Z]+ return VARIABLE;
 
 [ \t\n] ;
 

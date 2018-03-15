@@ -409,34 +409,36 @@ static yyconst flex_int32_t yy_ec[256] =
 
 static yyconst flex_int32_t yy_meta[12] =
     {   0,
-        1,    1,    1,    1,    1,    1,    1,    1,    2,    1,
-        2
+        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
+        1
     } ;
 
-static yyconst flex_int16_t yy_base[20] =
+static yyconst flex_int16_t yy_base[19] =
     {   0,
-        0,    0,   17,   18,   18,   18,   18,   18,   18,   10,
-        0,    0,    3,   18,    0,    4,    0,   18,   11
+        0,    0,   19,   20,   20,   20,   20,   20,   20,   12,
+        8,    7,    3,   20,    6,    2,    0,   20
     } ;
 
-static yyconst flex_int16_t yy_def[20] =
+static yyconst flex_int16_t yy_def[19] =
     {   0,
        18,    1,   18,   18,   18,   18,   18,   18,   18,   18,
-       19,   19,   18,   18,   19,   13,   13,    0,   18
+       18,   18,   18,   18,   18,   13,   13,    0
     } ;
 
-static yyconst flex_int16_t yy_nxt[30] =
+static yyconst flex_int16_t yy_nxt[32] =
     {   0,
         4,    5,    6,    7,    8,    4,    9,   10,   11,   12,
-       13,   16,   15,   17,   16,   14,   18,    3,   18,   18,
-       18,   18,   18,   18,   18,   18,   18,   18,   18
+       13,   16,   16,   17,   15,   15,   15,   14,   18,    3,
+       18,   18,   18,   18,   18,   18,   18,   18,   18,   18,
+       18
     } ;
 
-static yyconst flex_int16_t yy_chk[30] =
+static yyconst flex_int16_t yy_chk[32] =
     {   0,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,   13,   19,   13,   16,   10,    3,   18,   18,   18,
-       18,   18,   18,   18,   18,   18,   18,   18,   18
+        1,   13,   16,   13,   15,   12,   11,   10,    3,   18,
+       18,   18,   18,   18,   18,   18,   18,   18,   18,   18,
+       18
     } ;
 
 static yy_state_type yy_last_accepting_state;
@@ -458,7 +460,7 @@ char *yytext;
     #include "mytokens.h"
 /* Regular definitions */
 /* Patterns and actions */
-#line 462 "lex.yy.c"
+#line 464 "lex.yy.c"
 
 #define INITIAL 0
 
@@ -644,7 +646,7 @@ YY_DECL
 
 
 
-#line 648 "lex.yy.c"
+#line 650 "lex.yy.c"
 
 	if ( !(yy_init) )
 		{
@@ -703,7 +705,7 @@ yy_match:
 			yy_current_state = yy_nxt[yy_base[yy_current_state] + (unsigned int) yy_c];
 			++yy_cp;
 			}
-		while ( yy_base[yy_current_state] != 18 );
+		while ( yy_base[yy_current_state] != 20 );
 
 yy_find_action:
 		yy_act = yy_accept[yy_current_state];
@@ -778,7 +780,7 @@ YY_RULE_SETUP
 #line 29 "mylexer.l2"
 ECHO;
 	YY_BREAK
-#line 782 "lex.yy.c"
+#line 784 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
