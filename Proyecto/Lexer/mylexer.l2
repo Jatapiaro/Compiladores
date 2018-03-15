@@ -28,9 +28,9 @@ text {lowercase_letter}{uppercase_letter}
 "<" return LESS_THAN;
 ">" return GREATER_THAN;
 
-{lowercase_letter}+[A-Za-z]*[0-9]* return PREDICATE_NAME;
+({lowercase_letter}+[A-Za-z]*[0-9]*(_?))([A-Za-z]+[0-9]*(_?))* return PREDICATE_NAME;
 [0-9]+ return INTEGER;
-[A-Za-z]+[a-z]+ return DATA;
+([A-Za-z]+[a-z]+(_?))+ return DATA;
 (_?[A-Z]+[0-9]*)+ return VARIABLE;
 
 [ \t\n] ;

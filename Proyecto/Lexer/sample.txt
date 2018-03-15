@@ -7,8 +7,10 @@ empleado(4, Rafael, Lozano) :-
         empleado(1, _, _), empleado(VARIABLE_ID, VARIABLE_NOMBRE, _VARIABLE_APELLIDO).
 
 
-persona(Juanito, Lopez, hombre == hombre, 10).
+persona(Juanito, Lopez_De_La_Rosa, hombre == hombre, 10).
 persona(Juanita, Perez, mujer == hombre, 11) :-
     persona(Juanito, _, _, EDAD), persona(Ruben, _, _, EDAD > 1),
     persona(Moira, _, _, EDAD < 10), persona(Canela, _, _, EDAD >= 11),
     persona(Catrina, _, _, EDAD <= 11).
+
+pruebaRap22ida_es4to_FUn2ciona5(test, _, C).
