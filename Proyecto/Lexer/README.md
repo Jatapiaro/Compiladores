@@ -19,4 +19,4 @@ de los preicados cosas como predicado(Jaime, Duende).
 
 # ¿Qué funciones soporta?
 1. Actualmente soportamos predicados
-    i. Los
+        * Los
