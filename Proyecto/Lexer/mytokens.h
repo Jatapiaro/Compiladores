@@ -14,3 +14,4 @@
 #define EQUAL_OR_LESS_THAN 13
 #define DATA 14
 #define COMMENT 15
+#define RETRACT 16

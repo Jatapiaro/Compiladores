@@ -16,3 +16,17 @@ persona(Juanita, Perez, mujer == hombre, 11) :-
 pruebaRap22ida_es4to_FUn2ciona5(test, _, C).
 
 % Esto es un comentario de prueba
+empleado(100, El_commment, no_Afe_CtO).
+
+% Aquí son las pruebas con retract
+
+retract(predicate(Some, Lopez)).
+
+retract(predicate(Some == X, Lopez)).
+
+retract(predicate(Some, Lopez)) :-
+    retract(predicate(Some, Lopaz)), empleado(1, Javier, Lopez),
+    retract(predicate(Some, Data)).
+
+empleado(190, Thom, Yorke) :-
+    empleado(1, Javier, Lopez), retract(predicate(Some, Lopaz == Lopez)).

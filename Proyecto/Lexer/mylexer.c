@@ -26,7 +26,8 @@ char * names[] = {
     "Equal or greather than",
     "Equal or less than",
     "Data",
-    "Comment"
+    "Comment",
+    "Retracct"
 };
 
 void print_token_message( int type ) {
@@ -191,6 +192,58 @@ void validate_predicate(int * on_rule_enter_pointer, int first) {
 
 }
 
+/*
+* Validate the retract function
+* @param int * on_rule_enter_pointer that indicates that (single)?
+*   we must look for a '.' or ':-' at the end of the this method
+* @param int single if this is a single retract or is inside a rule
+*/
+void validate_retract(int * on_rule_enter_pointer, int single) {
+
+    /*
+    * Include variables to use during this process
+    */
+    int number_token, open_parenthesis_token,
+        data_token, close_parenthesis_token,
+        coma_token, dot_token;
+
+    /*
+    * First we must look for '('
+    * ex: retract(xxxx())
+    */
+    open_parenthesis_token = yylex();
+    if ( open_parenthesis_token != OPEN_PARENTHESIS ) {
+        print_error_message("(");
+        exit(1);
+    } else {
+        print_token_message(open_parenthesis_token);
+    }
+
+    /*
+    * We validate that inside is a valid predicate
+    */
+    number_token = yylex();
+    if ( number_token == PREDICATE_NAME ) {
+        print_token_message(number_token);
+        validate_predicate(on_rule_enter_pointer, 0);
+    } else {
+        print_error_message("predicate");
+    }
+
+    close_parenthesis_token = yylex();
+    if ( close_parenthesis_token != CLOSE_PARENTHESIS ) {
+        print_error_message(")");
+        exit(1);
+    } else {
+        print_token_message(close_parenthesis_token);
+    }
+
+    if ( single == 1 ) {
+        *on_rule_enter_pointer = 1;
+    }
+
+}
+
 int main(int argc, char const *argv[]) {
 
     int number_token, open_parenthesis_token,
@@ -238,6 +291,11 @@ int main(int argc, char const *argv[]) {
                 print_token_message(number_token);
                 break;
 
+            case RETRACT:
+                print_token_message(number_token);
+                validate_retract(&on_rule_enter, 1);
+                break;
+
             case RULE:
 
                 if ( on_rule_enter == 0 ) {
@@ -255,8 +313,11 @@ int main(int argc, char const *argv[]) {
                     if ( number_token == PREDICATE_NAME ) {
                         print_token_message(number_token);
                         validate_predicate(&on_rule_enter, 0);
-                    } else {
-                        print_error_message("a predicate");
+                    } else if ( number_token == RETRACT ) {
+                        print_token_message(number_token);
+                        validate_retract(&on_rule_enter, 0);
+                    }else {
+                        print_error_message("a predicate or retract");
                         exit(1);
                     }
                     /*
