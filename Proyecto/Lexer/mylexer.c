@@ -19,7 +19,12 @@ char * names[] = {
     "Predicate Name or Data",
     "Underscore",
     "Variable",
-    "Rule"
+    "Rule",
+    "Greather than",
+    "Less than",
+    "Equal",
+    "Equal or greather than",
+    "Equal or less than"
 };
 
 void print_token_message( int type ) {
@@ -36,6 +41,7 @@ int main(int argc, char const *argv[]) {
         data_token, close_parenthesis_token,
         coma_token, dot_token;
     int on_rule_enter = 0;
+    int on_variable_enter = 0;
     //Read scanner and return first valid token
     number_token = yylex();
 
@@ -85,11 +91,26 @@ int main(int argc, char const *argv[]) {
                         print_token_message(coma_token);
                         data_token = yylex();
                     } else {
+
                         close_parenthesis_token = coma_token;
                         if ( close_parenthesis_token != CLOSE_PARENTHESIS ) {
                             print_error_message(")");
                             exit(1);
                         }
+
+                        /*
+                        if ( close_parenthesis_token == EQUAL ) {
+                            close_parenthesis_token = yylex();
+                            if ( close_parenthesis_token != VARIABLE ) {
+                                print_error_message("variable or data");
+                                exit(1);
+                            } else {
+                                print_token_message(close_parenthesis_token);
+                                close_parenthesis_token = yylex();
+                            }
+                        }
+                        */
+
                         print_token_message(close_parenthesis_token);
                         break;
                     }

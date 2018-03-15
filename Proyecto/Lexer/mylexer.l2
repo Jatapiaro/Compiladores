@@ -21,6 +21,13 @@ text {lowercase_letter}{uppercase_letter}
 "_" return UNDERSCORE;
 ":-" return RULE;
 
+"==" return EQUAL;
+"<=" return EQUAL_OR_LESS_THAN;
+">=" return EQUAL_OR_GREATHER_THAN;
+
+"<" return LESS_THAN;
+">" return GREATER_THAN;
+
 {lowercase_letter}+[A-Za-z]* return PREDICATE_NAME;
 _?[A-Z]+ return VARIABLE;
 

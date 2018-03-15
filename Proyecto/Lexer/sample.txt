@@ -1,4 +1,4 @@
 esteEsUnEjemplo(_VARIABLE, someData, calca, XO) :-
-    ejemploA(VARIABLE), ejemploB(_VARIABLE3, data, XX).
+    ejemploA(VARIABLE), ejemploB(_VARIABLE3, data == other, XX).
 
 ejemploXX(nuevo, ejemplo, de, lexer).
