@@ -9,7 +9,12 @@ import org.antlr.v4.runtime.tree.TerminalNode;
  * which can be extended to create a listener which only needs to handle a subset
  * of the available methods.
  */
-public class GrammBaseListener implements GrammListener {
+public class MyBaseListener implements GrammListener {
+
+	int counter = 0;
+	Fraction f = new Fraction(0, 1);
+	char operand = '_';
+	AllFractions af = new AllFractions();
 	/**
 	 * {@inheritDoc}
 	 *
@@ -39,7 +44,17 @@ public class GrammBaseListener implements GrammListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFraction(GrammParser.FractionContext ctx) { }
+	@Override public void enterFraction(GrammParser.FractionContext ctx) {
+		String[] val = ctx.getText().split("%");
+		af.addFraction(new Fraction(Integer.parseInt(val[0]), Integer.parseInt(val[1])));
+		/*counter++;
+		if ( counter == 2 ) {
+			counter = 0;
+			System.out.println(f.operation(this.operand, new Fraction(Integer.parseInt(val[0]), Integer.parseInt(val[1]))));
+		} else {
+			f = new Fraction(Integer.parseInt(val[0]), Integer.parseInt(val[1]));
+		}*/
+	}
 	/**
 	 * {@inheritDoc}
 	 *
@@ -51,7 +66,10 @@ public class GrammBaseListener implements GrammListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterOperation(GrammParser.OperationContext ctx) { }
+	@Override public void enterOperation(GrammParser.OperationContext ctx) {
+		this.operand = ctx.getText().charAt(0);
+		this.af.addOperand(ctx.getText().charAt(0));
+	}
 	/**
 	 * {@inheritDoc}
 	 *
@@ -70,7 +88,8 @@ public class GrammBaseListener implements GrammListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitEveryRule(ParserRuleContext ctx) { }
+	@Override public void exitEveryRule(ParserRuleContext ctx) {
+	}
 	/**
 	 * {@inheritDoc}
 	 *

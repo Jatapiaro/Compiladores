@@ -17,13 +17,33 @@ public interface GrammListener extends ParseTreeListener {
 	 */
 	void exitProg(GrammParser.ProgContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link GrammParser#exprS}.
+	 * Enter a parse tree produced by {@link GrammParser#expr}.
 	 * @param ctx the parse tree
 	 */
-	void enterExprS(GrammParser.ExprSContext ctx);
+	void enterExpr(GrammParser.ExprContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link GrammParser#exprS}.
+	 * Exit a parse tree produced by {@link GrammParser#expr}.
 	 * @param ctx the parse tree
 	 */
-	void exitExprS(GrammParser.ExprSContext ctx);
+	void exitExpr(GrammParser.ExprContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GrammParser#fraction}.
+	 * @param ctx the parse tree
+	 */
+	void enterFraction(GrammParser.FractionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GrammParser#fraction}.
+	 * @param ctx the parse tree
+	 */
+	void exitFraction(GrammParser.FractionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GrammParser#operation}.
+	 * @param ctx the parse tree
+	 */
+	void enterOperation(GrammParser.OperationContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GrammParser#operation}.
+	 * @param ctx the parse tree
+	 */
+	void exitOperation(GrammParser.OperationContext ctx);
 }

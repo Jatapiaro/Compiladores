@@ -2,15 +2,13 @@ grammar Gramm;
 
 
 //Parser rules
-prog: exprS;
-
-exprS: '1';
-/*exprS: zero exprR;
-exprR: exprS one | one;
-zero: ZERO;
-one: ONE;
+prog: expr NEWLINE;
+expr: fraction operation expr | '(' fraction operation expr ')' (operation expr | ' ') | fraction;
+fraction: FRACTION;
+operation: OPERATION;
 
 //Lexer rules
-ZERO : '0';
-ONE : '1';
-NEWLINE : [\r\n]+ ;*/
+NUMBER : [0-9]+;
+OPERATION: '+' | '-' | '*' | '/';
+FRACTION: [0-9]+'%'[1-9]+;
+NEWLINE : [\r\n]+ ;
