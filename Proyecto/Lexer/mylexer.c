@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <errno.h>
 #include "mytokens.h"
 
 extern int yylex();
@@ -31,11 +32,13 @@ char * names[] = {
 };
 
 void print_token_message( int type ) {
-    printf("[%d, %s] => %s\n", type, names[type], yytext );
+    //printf("[%d, %s] => %s\n", type, names[type], yytext );
+    printf("%s\n", yytext);
 }
 
 void print_error_message( char * expected ) {
     printf("Syntax error in line %d, expected a '%s' but found '%s'\n", yylineno, expected, yytext);
+    fprintf(stderr, "Syntax error in line %d, expected a '%s' but found '%s'\n", yylineno, expected, yytext);
 }
 
 /*
