@@ -1,0 +1,6 @@
+estudiante(1336590, Jacobo Tapia, LSCA) :-
+    estudiante(1336592, Maka Hero, ITC2),
+    estudiante(13365983, Maki Jira, ITC1).
+
+estudiante(1336590, Jacobo Tapia, LSCA) :-
+    retract(estudiante(1336590, Jacobo Tapia, LSCA)).

@@ -12,7 +12,7 @@ import java.util.*;
  */
 public class MyBaseListener implements ProSQLListener {
 
-	List<Query> queries = new ArrayList<Query>();
+	Stack<Query> queries = new Stack<Query>();
 	/**
 	 * {@inheritDoc}
 	 *
@@ -30,28 +30,29 @@ public class MyBaseListener implements ProSQLListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterPredicate(ProSQLParser.PredicateContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitPredicate(ProSQLParser.PredicateContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterQuery(ProSQLParser.QueryContext ctx) {
-		Query q = new Query(ctx.getText());
-		queries.add(q);
-    }
+		String function = (ctx.getText().contains("retract"))? "retract" : "simple";
+		Query q = new Query(ctx.getText(), function);
+		queries.push(q);
+	}
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitQuery(ProSQLParser.QueryContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterChain_query(ProSQLParser.Chain_queryContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitChain_query(ProSQLParser.Chain_queryContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

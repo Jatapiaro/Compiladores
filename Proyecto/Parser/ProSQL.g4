@@ -9,9 +9,9 @@ grammar ProSQL;
 * entrada es drinkSentence. ‘a pint of beer’, por lo tanto todos los tokens
 * son matcheados en la regla de drinkSentence y antlr puede reconocerlos.
 */
-prog:	(query)* ;
-query: PREDICATE '(' (value)+ ').' | PREDICATE '(' (value)+ '):-' chain_query;
-chain_query: PREDICATE '(' (value)+ '),' chain_query | PREDICATE '(' (value)+ ').';
+prog:	(predicate)* ;
+predicate: query '.' | query ':-' (query ',')* query '.';
+query: STATEMENT '(' (value)+ ')' | 'retract('STATEMENT '(' (value)+ '))';
 value: VALUE | VALUE ',';
 
 /*
@@ -24,7 +24,7 @@ value: VALUE | VALUE ',';
 */
 SPACE: ' ';
 NEWLINE: [\r\n]+ ;
-PREDICATE: (('a'..'z')+(STRING_LITERAL)*INTEGER*('_')?)((STRING_LITERAL)+INTEGER*('_')?)*;
-STRING_LITERAL: ('a'..'z') | ('A'..'Z');
+STATEMENT: (('a'..'z')+(STRING_LITERAL)*INTEGER*('_')?)((STRING_LITERAL)+INTEGER*('_')?)*;
+STRING_LITERAL: ('a'..'z') | ('A'..'Z') | ('0'..'9');
 INTEGER: [0-9];
-VALUE: (STRING_LITERAL)+[0-9]* | INTEGER+ | '_';
+VALUE: (STRING_LITERAL)+((' ')?(STRING_LITERAL))* | INTEGER+ | '_';

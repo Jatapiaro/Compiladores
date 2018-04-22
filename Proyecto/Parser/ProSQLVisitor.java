@@ -16,17 +16,17 @@ public interface ProSQLVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitProg(ProSQLParser.ProgContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link ProSQLParser#predicate}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPredicate(ProSQLParser.PredicateContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link ProSQLParser#query}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitQuery(ProSQLParser.QueryContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link ProSQLParser#chain_query}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitChain_query(ProSQLParser.Chain_queryContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link ProSQLParser#value}.
 	 * @param ctx the parse tree

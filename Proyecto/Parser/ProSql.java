@@ -69,8 +69,13 @@ public class ProSql {
         ParseTreeWalker walker = new ParseTreeWalker();
         MyBaseListener listener = new MyBaseListener();
         walker.walk(listener, context);
-        List<Query> l = listener.queries;
-        sql.insertTuple(l.get(0));
+        Stack<Query> queries = listener.queries;
+        while ( !queries.empty() ) {
+            Query q = queries.pop();
+            if (!sql.executeQuery(q)) {
+                break;
+            }
+        }
     }
 
     public static List<String> getQueries() {

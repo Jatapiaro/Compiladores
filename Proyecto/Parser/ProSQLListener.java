@@ -17,6 +17,16 @@ public interface ProSQLListener extends ParseTreeListener {
 	 */
 	void exitProg(ProSQLParser.ProgContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link ProSQLParser#predicate}.
+	 * @param ctx the parse tree
+	 */
+	void enterPredicate(ProSQLParser.PredicateContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ProSQLParser#predicate}.
+	 * @param ctx the parse tree
+	 */
+	void exitPredicate(ProSQLParser.PredicateContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link ProSQLParser#query}.
 	 * @param ctx the parse tree
 	 */
@@ -26,16 +36,6 @@ public interface ProSQLListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitQuery(ProSQLParser.QueryContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link ProSQLParser#chain_query}.
-	 * @param ctx the parse tree
-	 */
-	void enterChain_query(ProSQLParser.Chain_queryContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link ProSQLParser#chain_query}.
-	 * @param ctx the parse tree
-	 */
-	void exitChain_query(ProSQLParser.Chain_queryContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link ProSQLParser#value}.
 	 * @param ctx the parse tree

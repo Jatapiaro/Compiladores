@@ -27,6 +27,18 @@ public class ProSQLBaseListener implements ProSQLListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterPredicate(ProSQLParser.PredicateContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitPredicate(ProSQLParser.PredicateContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterQuery(ProSQLParser.QueryContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -34,18 +46,6 @@ public class ProSQLBaseListener implements ProSQLListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitQuery(ProSQLParser.QueryContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterChain_query(ProSQLParser.Chain_queryContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitChain_query(ProSQLParser.Chain_queryContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
