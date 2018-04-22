@@ -9,7 +9,6 @@ import java.io.*;
 public class ProSql {
     public static void main(String[] args) {
 
-
         Scanner sc = new Scanner(System.in);
         StringBuilder sb = new StringBuilder();
 
@@ -22,19 +21,26 @@ public class ProSql {
     }
 
     public static void getTokens(String pathToFile) {
+
+        deleteError();
+
         if ( !isLexerCompiled() ) {
-            String s = compileLexer();
-            System.out.println(s);
+            compileLexer();
+            checkSyntaxAndGetTokens(pathToFile);
         } else {
-            //TODO check how you can call the c compiled form here
-            String s = checkSyntaxAndGetTokens(pathToFile);
-            System.out.println(s);
+            checkSyntaxAndGetTokens(pathToFile);
         }
+
+        if ( doesFileHasSyntaxError() ) {
+            printError();
+            deleteError();
+        } else {
+            deleteError();
+        }
+
     }
 
-    public static String checkSyntaxAndGetTokens(String path) {
-        String s = null;
-        StringBuilder sb = new StringBuilder();
+    public static void checkSyntaxAndGetTokens(String path) {
         try {
             Runtime rt = Runtime.getRuntime();
             String[] command = {"./mylexer"};
@@ -42,19 +48,12 @@ public class ProSql {
             pb.directory(new File("../Lexer"));
             pb.redirectInput(new File(path));
             pb.redirectOutput(new File("output.txt"));
+            pb.redirectError(new File("error.txt"));
             Process pr = pb.start();
-            BufferedReader stdInput = new BufferedReader(new
-                 InputStreamReader(pr.getInputStream()));
-
-            BufferedReader stdError = new BufferedReader(new
-                 InputStreamReader(pr.getErrorStream()));
-            while ((s = stdError.readLine()) != null) {
-                sb.append(s+"\n");
-            }
+            pr.waitFor();
         }catch(Exception e) {
             System.out.println(e);
         }
-        return (sb.toString().length() > 0)? sb.toString() : "";
     }
 
     public static String compileLexer() {
@@ -96,6 +95,39 @@ public class ProSql {
         File f = new File("../Lexer/mylexer");
         return f.exists();
 
+    }
+
+    public static boolean doesFileHasSyntaxError() {
+        boolean b = false;
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(new File("error.txt")));
+            String line = null;
+            while ((line = br.readLine()) != null) {
+              b = true;
+            }
+        } catch(Exception e) {
+            System.out.println(e);
+        }
+        return b;
+    }
+
+    public static void deleteError() {
+        File f = new File("error.txt");
+        if ( f.exists() ) {
+            f.delete();
+        }
+    }
+
+    public static void printError() {
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(new File("error.txt")));
+            String line = null;
+            while ((line = br.readLine()) != null) {
+              System.out.println(line);
+            }
+        } catch(Exception e) {
+            System.out.println(e);
+        }
     }
 
 }
