@@ -291,7 +291,7 @@ int main(int argc, char const *argv[]) {
                 break;
 
             case COMMENT:
-                print_token_message(number_token);
+                //print_token_message(number_token);
                 break;
 
             case RETRACT:
