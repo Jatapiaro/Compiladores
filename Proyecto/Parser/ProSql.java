@@ -38,9 +38,58 @@ public class ProSql {
             deleteOutput();
         } else {
             deleteError();
-            deleteOutput();
+            startExecution();
         }
 
+    }
+
+    public static void startExecution() {
+        List<String> queries = getQueries();
+        SqlConnector sql = new SqlConnector();
+        for( String s : queries ) {
+            //System.out.println(s);
+            makeQuery(s, sql);
+        }
+    }
+
+    public static void makeQuery(String sentence, SqlConnector sql) {
+        // Get our lexer
+        ProSQLLexer lexer = new ProSQLLexer(new ANTLRInputStream(sentence));
+
+        // Get a list of matched tokens
+        CommonTokenStream tokens = new CommonTokenStream(lexer);
+
+        // Pass the tokens to the parser
+        ProSQLParser parser = new ProSQLParser(tokens);
+
+        // Specify our entry point
+        ProSQLParser.ProgContext context = parser.prog();
+
+        // Walk it and attach our listener
+        ParseTreeWalker walker = new ParseTreeWalker();
+        MyBaseListener listener = new MyBaseListener();
+        walker.walk(listener, context);
+        List<Query> l = listener.queries;
+        sql.insertTuple(l.get(0));
+    }
+
+    public static List<String> getQueries() {
+        List<String> queries = new ArrayList<String>();
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(new File("output.txt")));
+            String line = null;
+            StringBuilder sb = new StringBuilder();
+            while ((line = br.readLine()) != null) {
+                sb.append(line);
+                if ( line.equals(".") ) {
+                    queries.add(sb.toString());
+                    sb = new StringBuilder();
+                }
+            }
+        } catch(Exception e) {
+            System.out.println(e);
+        }
+        return queries;
     }
 
     public static void checkSyntaxAndGetTokens(String path) {

@@ -355,6 +355,9 @@ int main(int argc, char const *argv[]) {
                     on_rule_enter = 0;
                     print_error_message(". or :-");
                     exit(1);
+                } else {
+                    print_error_message("predicate name ( starting with a lower case )");
+                    exit(1);
                 }
                 break;
 
