@@ -32,7 +32,7 @@ text {lowercase_letter}{uppercase_letter}
 
 ({lowercase_letter}+[A-Za-z]*[0-9]*(_?))([A-Za-z]+[0-9]*(_?))* return PREDICATE_NAME;
 [0-9]+ return INTEGER;
-([A-Za-z]+[a-z]+(_?))+ return DATA;
+([A-Za-z]+[a-z]+(_?))+(" "?[A-Za-z]+[a-z]+(_?))* return DATA;
 (_?[A-Z]+[0-9]*)+ return VARIABLE;
 
 "%"[^*\n]* return COMMENT;
