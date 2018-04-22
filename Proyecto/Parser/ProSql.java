@@ -23,6 +23,7 @@ public class ProSql {
     public static void getTokens(String pathToFile) {
 
         deleteError();
+        deleteOutput();
 
         if ( !isLexerCompiled() ) {
             compileLexer();
@@ -34,8 +35,10 @@ public class ProSql {
         if ( doesFileHasSyntaxError() ) {
             printError();
             deleteError();
+            deleteOutput();
         } else {
             deleteError();
+            deleteOutput();
         }
 
     }
@@ -113,6 +116,13 @@ public class ProSql {
 
     public static void deleteError() {
         File f = new File("error.txt");
+        if ( f.exists() ) {
+            f.delete();
+        }
+    }
+
+    public static void deleteOutput() {
+        File f = new File("output.txt");
         if ( f.exists() ) {
             f.delete();
         }
