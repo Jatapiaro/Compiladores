@@ -5,6 +5,8 @@ estudiante(1336590, Jacobo Tapia, LSCA) :-
 estudiante(1336590, Jacobo Tapia, LSCA) :-
     retract(estudiante(1336590, Jacobo Tapia, LSCA)).
 
+estudiante(1336590, Jacobo Misael de la Rosa, ITC).
+
 % Esto es un query, _ indica que es un select, mientras que lo que se añade es con lo que se va a buscar
 estudiante(_,Jacobo Tapiar,_) :-
     estudiante(1336599, Jacobo Tapiar, ITC),
