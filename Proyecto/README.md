@@ -28,8 +28,8 @@ Es un compilador que traduce sintaxis de Prolog a MSSQL.
 
 ### Concideraciones
 
-    1. Al ingresar algúna sentencia `estudiante(John Doe, Hola, Si)`, cada uno de los valores debe empezar con letra mayúscula y seguir con letra minúscula, pues por alguna razón, a pesar de que pusimos en antlr que aceptara ambas, no funciona.
-    2. Al ingresar Al ingresar algúna sentencia `estudiante(John Doe, 09)`, si queremos ingresar como parámetro un número de un solo digito hay que ponerle el 0 delante, pues por alguna razón ANTLR no nos está permitiendo el digito solo.
+  1. Al ingresar algúna sentencia `estudiante(John Doe, Hola, Si)`, cada uno de los valores debe empezar con letra mayúscula y seguir con letra minúscula, pues por alguna razón, a pesar de que pusimos en antlr que aceptara ambas, no funciona.
+  2. Al ingresar Al ingresar algúna sentencia `estudiante(John Doe, 09)`, si queremos ingresar como parámetro un número de un solo digito hay que ponerle el 0 delante, pues por alguna razón ANTLR no nos está permitiendo el digito solo.
 
 ### Equipo
   1. Jacobo Misael Tapia de la Rosa - A01336590
