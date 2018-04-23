@@ -24,7 +24,11 @@ public class SqlConnector {
         switch (q.function) {
 
             case "simple":
-                return insertTuple(q);
+                if ( !q.hasUnderscoreParams ) {
+                    return insertTuple(q);
+                } else {
+                    return makeQuery(q);
+                }
             case "retract":
                 return retractQuery(q);
             default:
@@ -44,7 +48,12 @@ public class SqlConnector {
         try {
             stmt = con.createStatement();
             String query = insertQueryString(q);
-            stmt.executeUpdate(query);
+            int affectedRows = stmt.executeUpdate(query);
+            q.sqlQuery = query;
+            q.function = "insert";
+            List<String> result = new ArrayList<String>();
+            result.add("Created: "+affectedRows+" rows");
+            q.setQueryResult(result);
             return true;
         } catch(Exception e) {
             System.out.println(e);
@@ -67,6 +76,77 @@ public class SqlConnector {
         String s = query.reverse().toString().replaceFirst(",", "");
         s = new StringBuilder(s).reverse().toString();
         return s;
+    }
+
+    //=====================================================================
+    //
+    //  Start of query functions
+    //
+    //=====================================================================
+    public boolean makeQuery( Query q ) {
+        List<String> columns = listOfColumns(q.table);
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        String queryString = queryString(q, columns);
+        System.out.println(queryString);
+        try {
+            stmt = con.prepareStatement(queryString);
+            int index = 1;
+            int counter = 0;
+            for ( String value : q.values ) {
+                if ( !value.equals("_") ) {
+                    if (isParsable(value)) {
+                        stmt.setInt(index, Integer.parseInt(value));
+                    } else {
+                        stmt.setString(index, value);
+                    }
+                    index++;
+                } else {
+                    counter++;
+                }
+            }
+            rs = stmt.executeQuery();
+            ResultSetMetaData rsmd = rs.getMetaData();
+            List<String> result = new ArrayList<String>();
+            while (rs.next()) {
+                StringBuilder sb = new StringBuilder();
+                for ( int j = 1; j <= counter; j++) {
+                    sb.append(rsmd.getColumnName(j)+": "+rs.getString(j)+", ");
+                }
+                result.add(sb.toString());
+            }
+            //System.out.println(result);
+            q.sqlQuery = queryString;
+            q.function = "query";
+            q.setQueryResult(result);
+            return true;
+        } catch(Exception e) {
+            System.out.println(e);
+            return true;
+        }
+    }
+
+    public String queryString(Query q, List<String> columns) {
+        StringBuilder sb = new StringBuilder("SELECT ");
+        StringBuilder where = new StringBuilder();
+        int j = 0;
+        for ( int i = 0; i < q.values.length; i++ ) {
+            String val = q.values[i];
+            if ( val.equals("_") ) {
+                sb.append(columns.get(i)+",");
+            } else {
+                if ( j == 0 ) {
+                    where.append(" WHERE "+columns.get(i)+"=? ");
+                } else {
+                    where.append(" AND "+columns.get(i)+"=? ");
+                }
+                j++;
+            }
+        }
+        sb = new StringBuilder(sb.reverse().toString().replaceFirst(",","")).reverse();
+        sb.append(" FROM "+q.table+" "+where.toString());
+        //System.out.println(sb.toString());
+        return sb.toString();
     }
 
     //=====================================================================

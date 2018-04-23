@@ -74,6 +74,8 @@ public class ProSql {
             Query q = queries.pop();
             if (!sql.executeQuery(q)) {
                 break;
+            } else {
+                System.out.println(q.printQueryResult());
             }
         }
     }
