@@ -47,9 +47,10 @@ public class ProSql {
         List<String> queries = getQueries();
         SqlConnector sql = new SqlConnector();
         for( String s : queries ) {
-            //System.out.println(s);
             makeQuery(s, sql);
         }
+        deleteError();
+        deleteOutput();
     }
 
     public static void makeQuery(String sentence, SqlConnector sql) {
