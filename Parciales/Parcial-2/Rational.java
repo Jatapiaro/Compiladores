@@ -12,9 +12,8 @@ public class Rational {
         }
 
         int num = (int) Math.round(d);
-        int g = 1;
-        this.num = num / g;
-        this.denom = denom / g;
+        this.num = num;
+        this.denom = denom;
         //System.out.println(new Fraction(this.num, this.denom));
     }
 
@@ -27,7 +26,7 @@ public class Rational {
         return String.valueOf(num) + "/" + String.valueOf(denom);
     }
 
-    public static int gcd(int p, int q) {
+    public static int gcd2(int p, int q) {
         while (q != 0) {
             int temp = q;
             q = p % q;
