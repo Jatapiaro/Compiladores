@@ -26,6 +26,10 @@ Es un compilador que traduce sintaxis de Prolog a MSSQL.
   3. Consultas, por ejemplo `estudiante(_,_,LSCA)`, en donde cada `_` significa que es la columna que queremos seleccionar, y los elementos explicitos son aquellos con los que haremos el `WHERE column = element`.
   4. Encadenamiento de expresiones, es decir, si hay varias expresiones encadenadas, se ejecutará primero la última, y asi sucesivamente, y por lo tanto si una de ellas falla, las que siguen no se ejecutan, como en prolog.
 
+### Concideraciones
+
+    1. Al ingresar algúna sentencia `estudiante(John Doe, Hola, Si)`, cada uno de los valores debe empezar con letra mayúscula y seguir con letra minúscula, pues por alguna razón, a pesar de que pusimos en antlr que aceptara ambas, no funciona.
+    2. Al ingresar Al ingresar algúna sentencia `estudiante(John Doe, 09)`, si queremos ingresar como parámetro un número de un solo digito hay que ponerle el 0 delante, pues por alguna razón ANTLR no nos está permitiendo el digito solo.
 
 ### Equipo
   1. Jacobo Misael Tapia de la Rosa - A01336590
