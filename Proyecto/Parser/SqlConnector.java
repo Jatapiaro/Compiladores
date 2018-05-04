@@ -136,13 +136,16 @@ public class SqlConnector {
             stmt = con.prepareStatement(queryString);
             int index = 1;
             int counter = 0;
-            for ( String value : q.values ) {
-                if ( !value.equals("_") ) {
-                    if (isParsable(value)) {
-                        stmt.setInt(index, Integer.parseInt(value));
+            for ( Value value : q.processedValues ) {
+                if ( value.type != 1 ) {
+                    /*String val = value.generateArray();
+                    System.out.println("El value: "+val);
+                    stmt.setObject(index, val);*/
+                    /*if (isParsable(value.value)) {
+                        stmt.setInt(index, Integer.parseInt(value.value));
                     } else {
-                        stmt.setString(index, value);
-                    }
+                        stmt.setString(index, value.value);
+                    }*/
                     index++;
                 } else {
                     counter++;
@@ -179,16 +182,18 @@ public class SqlConnector {
                 sb.append(columns.get(i)+",");
             } else {
                 if ( j == 0 ) {
-                    where.append(" WHERE "+columns.get(i)+"=? ");
+                    //System.out.println("On enter query string: "+i+" : "+q.processedValues[i]);
+                    where.append(" WHERE "+columns.get(i)+" IN ("+ q.processedValues[i].generateArray() +") ");
                 } else {
-                    where.append(" AND "+columns.get(i)+"=? ");
+                    //System.out.println("On enter query string: "+i+" : "+q.processedValues[i]);
+                    where.append(" AND "+columns.get(i)+" IN ("+ q.processedValues[i].generateArray()+ ") ");
                 }
                 j++;
             }
         }
         sb = new StringBuilder(sb.reverse().toString().replaceFirst(",","")).reverse();
         sb.append(" FROM "+q.table+" "+where.toString());
-        //System.out.println(sb.toString());
+        System.out.println("El query_: "+sb.toString());
         return sb.toString();
     }
 
@@ -229,18 +234,19 @@ public class SqlConnector {
         StringBuilder sb = new StringBuilder();
         sb.append("DELETE FROM ");
         sb.append(q.table);
-        int index = 0;
-        for ( String values : q.values ) {
-            if (index == 0) {
-                String col = columns.get(0);
-                sb.append(" WHERE "+col+"=? ");
-                columns.remove(0);
+        int j = 0;
+        for ( int i = 0; i < q.values.length; i++ ) {
+            String val = q.values[i];
+            if ( val.equals("_") ) {
+                //sb.append(columns.get(i)+",");
             } else {
-                String col = columns.get(0);
-                sb.append("AND "+col+"=? ");
-                columns.remove(0);
+                if ( j == 0 ) {
+                    sb.append(" WHERE "+columns.get(i)+"=? ");
+                } else {
+                    sb.append(" AND "+columns.get(i)+"=? ");
+                }
+                j++;
             }
-            index++;
         }
         //System.out.println(sb.toString());
         return sb.toString();

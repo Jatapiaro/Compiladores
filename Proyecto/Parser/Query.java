@@ -4,11 +4,13 @@ public class Query {
 
     String table, function, sqlQuery;
     String[] values;
-    boolean hasUnderscoreParams;
+    boolean hasUnderscoreParams, hasVariables;
     List<String> queryResult;
+    Value[] processedValues;
 
     public Query( String query, String function ) {
         this.hasUnderscoreParams = false;
+        this.hasVariables = false;
         this.queryResult = new ArrayList<String>();
         this.sqlQuery = "";
         switch (function) {
@@ -19,7 +21,11 @@ public class Query {
                 retractQuery(query);
                 break;
         }
-
+        /*System.out.print("Proccesed Values: ");
+        for ( Value v : this.processedValues ) {
+            System.out.print(v+"\n");
+        }
+        System.out.println("");*/
     }
 
     private void simpleQuery(String query) {
@@ -41,9 +47,24 @@ public class Query {
         String[] data = query.split("\\(");
         this.table = data[0];
         this.values = data[1].replace(")", "").split(",");
+        this.processedValues = new Value[this.values.length];
+        int i = 0;
         for ( String value : this.values ) {
-            if (value.equals("_")) {
+            if ( value.equals("_") ) {
                 this.hasUnderscoreParams = true;
+                this.processedValues[i] = new Value(i+1, "_", 1);
+                i++;
+                continue;
+            } else if ( value.startsWith("_") ) {
+                String aux = value.replace("_", "");
+                if ( this.isStringUpperCase(aux) ) {
+                    this.hasVariables = true;
+                    this.processedValues[i] = new Value(i+1, value, 2);
+                    i++;
+                }
+            } else {
+                this.processedValues[i] = new Value(i+1, value, 0);
+                i++;
             }
         }
     }
@@ -59,7 +80,7 @@ public class Query {
             sb.append(row+". "+s+"\n");
             row++;
         }
-        sb.append("------------------");
+        sb.append("x-x-x-x-x-x-x-x");
         return sb.toString();
     }
 
@@ -74,6 +95,20 @@ public class Query {
         sb.append("\nAs: "+this.function);
         sb.append("\n---------");
         return sb.toString();
+    }
+
+    private static boolean isStringUpperCase(String str){
+        //convert String to char array
+        char[] charArray = str.toCharArray();
+
+        for(int i=0; i < charArray.length; i++){
+
+            //if any character is not in upper case, return false
+            if( !Character.isUpperCase( charArray[i] ))
+                return false;
+        }
+
+        return true;
     }
 
 }

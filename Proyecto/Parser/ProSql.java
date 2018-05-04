@@ -71,6 +71,7 @@ public class ProSql {
         MyBaseListener listener = new MyBaseListener();
         walker.walk(listener, context);
         Stack<Query> queries = listener.queries;
+        System.out.println("\n\n-------- START OF BACH -------");
         while ( !queries.empty() ) {
             Query q = queries.pop();
             if (!sql.executeQuery(q)) {
@@ -79,6 +80,7 @@ public class ProSql {
                 System.out.println(q.printQueryResult());
             }
         }
+        System.out.println("-------- END OF BACH -------\n\n");
     }
 
     public static List<String> getQueries() {
@@ -88,11 +90,12 @@ public class ProSql {
             String line = null;
             StringBuilder sb = new StringBuilder();
             while ((line = br.readLine()) != null) {
-                sb.append(line);
+                /*sb.append(line);
                 if ( line.equals(".") ) {
                     queries.add(sb.toString());
                     sb = new StringBuilder();
-                }
+                }*/
+                queries.add(line);
             }
         } catch(Exception e) {
             System.out.println(e);

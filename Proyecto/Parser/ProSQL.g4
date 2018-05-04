@@ -16,15 +16,10 @@ value: VALUE | VALUE ',';
 
 /*
 * Lexer rules
-* Palabras en mayúsculas que al darles un string
-* ‘a pint of beer’, va a hacer match de ‘a’ a la
-* regla de ARTICLE, ‘pint’ a DRINKING VESSEL,
-* ‘of’ a OF y finalmente ‘beer’ a un texto,
-* que puede tener cualquier letra en minúscula una o más veces.
 */
 SPACE: ' ';
 NEWLINE: [\r\n]+ ;
 STATEMENT: (('a'..'z')+(STRING_LITERAL)*INTEGER*('_')?)((STRING_LITERAL)+INTEGER*('_')?)*;
-STRING_LITERAL: ('a'..'z') | ('A'..'Z') | ('0'..'9');
+STRING_LITERAL: ('a'..'z')(' ')? | ('_')?('A'..'Z')(' ')? | ('0'..'9')(' ')?;
 INTEGER: [0-9];
-VALUE: (STRING_LITERAL)+((' ')?(STRING_LITERAL))* | INTEGER+ | '_';
+VALUE: STRING_LITERAL+ | INTEGER+ | '_';

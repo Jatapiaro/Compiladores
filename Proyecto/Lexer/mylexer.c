@@ -28,12 +28,16 @@ char * names[] = {
     "Equal or less than",
     "Data",
     "Comment",
-    "Retracct"
+    "Retract"
 };
 
 void print_token_message( int type ) {
     //printf("[%d, %s] => %s\n", type, names[type], yytext );
-    printf("%s\n", yytext);
+    if( type == DOT ) {
+        printf("%s\n", yytext);
+    } else {
+        printf("%s", yytext);
+    }
 }
 
 void print_error_message( char * expected ) {
