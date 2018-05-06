@@ -24,7 +24,7 @@ public class SqlConnector {
         switch (q.function) {
 
             case "simple":
-                if ( !q.hasUnderscoreParams ) {
+                if ( !q.isQuery() ) {
                     return insertTuple(q);
                 } else {
                     return makeQuery(q);
@@ -137,7 +137,7 @@ public class SqlConnector {
             int index = 1;
             int counter = 0;
             for ( Value value : q.processedValues ) {
-                if ( value.type != 1 ) {
+                if ( value.type == 0 || (value.type == 2 && value.variableData != null) ) {
                     /*String val = value.generateArray();
                     System.out.println("El value: "+val);
                     stmt.setObject(index, val);*/
@@ -157,6 +157,7 @@ public class SqlConnector {
             while (rs.next()) {
                 StringBuilder sb = new StringBuilder();
                 for ( int j = 1; j <= counter; j++) {
+                    q.insertVariableData(j, rs.getString(j));
                     sb.append(rsmd.getColumnName(j)+": "+rs.getString(j)+", ");
                 }
                 result.add(sb.toString());
@@ -165,9 +166,10 @@ public class SqlConnector {
             q.sqlQuery = queryString;
             q.function = "query";
             q.setQueryResult(result);
+            //System.out.println("Variables of q: "+q.variables);
             return true;
         } catch(Exception e) {
-            System.out.println(e);
+            e.printStackTrace();
             return true;
         }
     }
@@ -178,7 +180,9 @@ public class SqlConnector {
         int j = 0;
         for ( int i = 0; i < q.values.length; i++ ) {
             String val = q.values[i];
-            if ( val.equals("_") ) {
+            //System.out.println(q.processedValues[i]);
+            //System.out.println("El tipo: "+q.processedValues[i].type);
+            if ( (q.processedValues[i].type == 1) || (q.processedValues[i].type == 2 && q.processedValues[i].variableData == null) ) {
                 sb.append(columns.get(i)+",");
             } else {
                 if ( j == 0 ) {
@@ -193,7 +197,7 @@ public class SqlConnector {
         }
         sb = new StringBuilder(sb.reverse().toString().replaceFirst(",","")).reverse();
         sb.append(" FROM "+q.table+" "+where.toString());
-        System.out.println("El query_: "+sb.toString());
+        //System.out.println("El query_: "+sb.toString());
         return sb.toString();
     }
 

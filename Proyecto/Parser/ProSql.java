@@ -70,10 +70,11 @@ public class ProSql {
         ParseTreeWalker walker = new ParseTreeWalker();
         MyBaseListener listener = new MyBaseListener();
         walker.walk(listener, context);
-        Stack<Query> queries = listener.queries;
-        System.out.println("\n\n-------- START OF BACH -------");
+        Stack<Query> queries = listener.rule.queries;
+        System.out.println("\n\n-------- START OF BACH -------\n");
         while ( !queries.empty() ) {
             Query q = queries.pop();
+            q.processVariables();
             if (!sql.executeQuery(q)) {
                 break;
             } else {

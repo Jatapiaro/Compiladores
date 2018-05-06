@@ -1,4 +1,13 @@
-%estudiante(_VARIABLE).
+estudiante(_).
+
+estudiante(372837, Jose Ivander, ITC) :-
+    estudiante(706393, Carlos Rogger, ITC),
+    estudiante(710889, Ricardo Raul, ITC),
+    estudiante(372837, Pablo Enriquez, ITC),
+    estudiante(715753, Rafael Lozano, ITS),
+    estudiante(372837, John Doe, LAD),
+    estudiante(715753, John Foo, LIN).
+
 
 estudiante(1336590, Jacobo Tapia, LSCA) :-
     estudiante(1336592, Maka Hero, LSCA),
@@ -8,11 +17,16 @@ estudiante(1336590, Jacobo Tapia, LSCA) :-
     retract(estudiante(1336590, Jacobo Tapia, LSCA)).
 
 estudiante(1336590, Jacobo Misael de la Rosa, ITC).
-%retract(estudiante(1336590)).
+retract(estudiante(1336590)).
 estudiante(_,_,_).
 
 % Esto es un query, _ indica que es un select, mientras que lo que se añade es con lo que se va a buscar
-%estudiante(_,Jacobo Tapiar,_) :-
-%    estudiante(1336599, Jacobo Tapiar, ITC),
-%    estudiante(1336590,_,ITC),
-%    estudiante(_,_,LSCA).
+estudiante(_,Jacobo Tapiar,_) :-
+    estudiante(1336599, Jacobo Tapiar, ITC),
+    estudiante(1336590,_,ITC),
+    estudiante(_,_,LSCA).
+
+curso(_CURSOS,_,_,_) :-
+    estudiante(_MATRICULAS,_,_),
+    grupo(_CURSOS, _, _, Abel Bueno),
+    integrante(_CURSOS,_,_,_MATRICULAS).

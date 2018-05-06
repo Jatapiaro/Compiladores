@@ -10,11 +10,10 @@ public class Value {
         this.column = column;
         this.value = value;
         this.type = type;
-        variableData = new ArrayList<String>();
     }
 
     public void setVariableData( List<String> variableData ) {
-        this.variableData = this.variableData;
+        this.variableData = variableData;
     }
 
     public String generateArray() {
@@ -24,9 +23,9 @@ public class Value {
             StringBuilder sb = new StringBuilder();
             for ( int i = 0; i<this.variableData.size(); i++ ) {
                 if (i == this.variableData.size()-1) {
-                    sb.append("'"+this.value+"'");
+                    sb.append("'"+this.variableData.get(i).trim()+"'");
                 } else {
-                    sb.append("'"+this.value+"',");
+                    sb.append("'"+this.variableData.get(i).trim()+"',");
                 }
             }
             return sb.toString();

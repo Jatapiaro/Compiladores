@@ -12,7 +12,7 @@ import java.util.*;
  */
 public class MyBaseListener implements ProSQLListener {
 
-	Stack<Query> queries = new Stack<Query>();
+	Rule rule = new Rule();
 	/**
 	 * {@inheritDoc}
 	 *
@@ -45,7 +45,7 @@ public class MyBaseListener implements ProSQLListener {
 	@Override public void enterQuery(ProSQLParser.QueryContext ctx) {
 		String function = (ctx.getText().contains("retract"))? "retract" : "simple";
 		Query q = new Query(ctx.getText(), function);
-		queries.push(q);
+		rule.addQueryToStack(q);
 	}
 	/**
 	 * {@inheritDoc}

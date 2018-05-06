@@ -7,6 +7,7 @@ public class Query {
     boolean hasUnderscoreParams, hasVariables;
     List<String> queryResult;
     Value[] processedValues;
+    HashMap<String, List<String>> variables;
 
     public Query( String query, String function ) {
         this.hasUnderscoreParams = false;
@@ -74,13 +75,13 @@ public class Query {
     }
 
     public String printQueryResult() {
-        StringBuilder sb = new StringBuilder("Result of "+this.function+"( "+this.sqlQuery+" ) in "+this.table+":\n");
+        StringBuilder sb = new StringBuilder("\nResult of "+this.function+"( "+this.sqlQuery+" ) in "+this.table+":\n");
         int row = 1;
         for ( String s : this.queryResult ) {
             sb.append(row+". "+s+"\n");
             row++;
         }
-        sb.append("x-x-x-x-x-x-x-x");
+        sb.append("\nx-x-x-x-x-x-x-x\n");
         return sb.toString();
     }
 
@@ -109,6 +110,43 @@ public class Query {
         }
 
         return true;
+    }
+
+    public void setVariablesData( HashMap<String, List<String>> variables ) {
+        this.variables = variables;
+    }
+
+    public void insertVariableData(int column, String data) {
+        for ( Value v : this.processedValues ) {
+            if ( v.type == 2 && v.column == column ) {
+                this.appendResultToVariable(v.value, data);
+                break;
+            }
+        }
+    }
+
+    private void appendResultToVariable(String variable, String result) {
+        if ( !this.variables.containsKey(variable) ) {
+            List<String> l = new ArrayList<String>();
+            this.variables.put(variable, l);
+        }
+        if ( !this.variables.get(variable).contains(result) ) {
+            this.variables.get(variable).add(result);
+        }
+    }
+
+    public boolean isQuery() {
+        return this.hasUnderscoreParams || this.hasVariables;
+    }
+
+    public void processVariables() {
+        for ( Value v : this.processedValues ) {
+            if ( v.type == 2 && this.variables.containsKey(v.value) ) {
+                //System.out.println("Si tiene la llave n: "+this.variables.get(v.value));
+                v.setVariableData(this.variables.get(v.value));
+                //System.out.println(v.variableData);
+            }
+        }
     }
 
 }
