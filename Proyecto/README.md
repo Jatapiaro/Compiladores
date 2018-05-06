@@ -25,6 +25,7 @@ Es un compilador que traduce sintaxis de Prolog a MSSQL.
   2. Eliminar un registro utilizando `retract()`, por ejemplo `retract(estudiante(1336590, Jacobo Tapia, LSCA)).` En este punto se pretende actualizar para que no necesite todos los datos y se puede hacer eliminaciones como `retract(estudiante(1336590, _, _)).` Donde solo se necesita un parametro o dos para eliminar un registro.
   3. Consultas, por ejemplo `estudiante(_,_,LSCA)`, en donde cada `_` significa que es la columna que queremos seleccionar, y los elementos explicitos son aquellos con los que haremos el `WHERE column = element`.
   4. Encadenamiento de expresiones, es decir, si hay varias expresiones encadenadas, se ejecutará primero la última, y asi sucesivamente, y por lo tanto si una de ellas falla, las que siguen no se ejecutan, como en prolog.
+  5. Utilizar variables para guardar información y hacer un query recursivo. Por ejemplo `curso(_CURSOS,_,_,_) :- estudiante(_MATRICULAS,_,_), grupo(_CURSOS, _, _, Abel Bueno), integrante(_CURSOS,_,_,_MATRICULAS).`. En este caso, primero se obtiene de la tabla integrante las matriculas de los alumnos, y el id de los cursos, y a partir de eso se hace queries en las siguientes tablas.
 
 ### Consideraciones
 
