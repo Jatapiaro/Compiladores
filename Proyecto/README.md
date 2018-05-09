@@ -39,19 +39,19 @@ Es un compilador que traduce sintaxis de Prolog a MSSQL.
   4. Ricardo Raúl Salcedo Trejo - A01337828
   5. José Ivander Shvartz Nógez - A01331933
 
-### To install and be able to run antlr4 command everywhere
+### Instalar antlr4 
 
-In case you don't use an IDE and need to use antlr
+Debido a que no utilizamos IDE, la forma de instalar antlr4 es la siguiente
 
-  1. Open terminal
-  2. run (`$ cd /usr/local/lib`)
-  3. run (`sudo curl -O http://www.antlr.org/download/antlr-4.5.3-complete.jar`)
-  4. Open ~/.bash_profile (`$ vi ~/.bash_profile`)
-  5. Paste the following at the end of the file
+  1. Abrir la terminal
+  2. Correr el comando (`$ cd /usr/local/lib`)
+  3. Correr el comando (`sudo curl -O http://www.antlr.org/download/antlr-4.5.3-complete.jar`)
+  4. Abrir ~/.bash_profile (`$ vi ~/.bash_profile`)
+  5. Pegar lo siguiente en dicho archivo
       ```
       export CLASSPATH=".:/usr/local/lib/antlr-4.5.3-complete.jar:$CLASSPATH"
       alias antlr4='java -jar /usr/local/lib/antlr-4.5.3-complete.jar'
       alias grun='java org.antlr.v4.gui.TestRig'
       ```
-  6. Close and save the file
-  7. Restart your terminal
+  6. Cerrar y guardar el archivo. 
+  7. Reinicia tu terminal
