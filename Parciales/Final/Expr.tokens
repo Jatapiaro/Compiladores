@@ -1,0 +1,15 @@
+T__0=1
+T__1=2
+SUMA=3
+RESTA=4
+MULTIPLICACION=5
+DIVISION=6
+NEWLINE=7
+INT=8
+FRAC=9
+'('=1
+')'=2
+'+'=3
+'-'=4
+'*'=5
+'/'=6
